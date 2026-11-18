@@ -25,3 +25,15 @@ tarefa   Running   0/1           10s        10s
 root@controlplane:~$ kubectl -n aula11 get pods
 NAME           READY   STATUS      RESTARTS   AGE
 tarefa-58c84   0/1     Completed   0          22s
+
+Passo 3
+root@controlplane:~$ kubectl -n aula11 wait --for=condition=complete \
+  job/tarefa --timeout=120s
+job.batch/tarefa condition met
+root@controlplane:~$ kubectl -n aula11 get job tarefa
+NAME     STATUS     COMPLETIONS   DURATION   AGE
+tarefa   Complete   1/1           12s        90s
+root@controlplane:~$ kubectl -n aula11 logs job/tarefa
+Inicio
+Wed Nov 18 01:31:05 UTC 2026
+Concluido
