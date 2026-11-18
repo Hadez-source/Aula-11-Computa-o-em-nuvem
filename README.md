@@ -84,3 +84,23 @@ root@controlplane:~$ kubectl -n aula11 logs job/teste-agora
 Wed Nov 18 01:50:18 UTC 2026
 Execucao agendada
 
+Passo 7
+root@controlplane:~$ kubectl -n aula11 get cronjob,jobs
+NAME                    SCHEDULE      TIMEZONE   SUSPEND   ACTIVE   LAST SCHEDULE   AGE
+cronjob.batch/relogio   */1 * * * *   <none>     False     0        41s             3m55s
+
+NAME                         STATUS     COMPLETIONS   DURATION   AGE
+job.batch/lote               Complete   3/3           17s        9m33s
+job.batch/relogio-29916110   Complete   1/1           3s         101s
+job.batch/relogio-29916111   Complete   1/1           3s         41s
+job.batch/tarefa             Complete   1/1           14s        14m
+job.batch/teste-agora        Complete   1/1           3s         84s
+root@controlplane:~$ kubectl -n aula11 get pods
+NAME                     READY   STATUS      RESTARTS   AGE
+lote-p4tjw               0/1     Completed   0          9m43s
+lote-qkwh7               0/1     Completed   0          9m43s
+lote-z5jn6               0/1     Completed   0          9m34s
+relogio-29916110-7mkj8   0/1     Completed   0          111s
+relogio-29916111-ghgzt   0/1     Completed   0          51s
+tarefa-b22np             0/1     Completed   0          14m
+teste-agora-srgwg        0/1     Completed   0          94s
