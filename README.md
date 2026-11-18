@@ -62,3 +62,13 @@ lote-p4tjw     0/1     Completed   0          26s
 lote-qkwh7     0/1     Completed   0          26s
 lote-z5jn6     0/1     Completed   0          17s
 tarefa-b22np   0/1     Completed   0          5m5s
+
+Passo 5
+root@controlplane:~$ kubectl -n aula11 create cronjob relogio \
+  --image=busybox:1.36 \
+  --schedule='*/1 * * * *' -- \
+  sh -c 'date; echo Execucao agendada'
+cronjob.batch/relogio created
+root@controlplane:~$ kubectl -n aula11 get cronjob relogio
+NAME      SCHEDULE      TIMEZONE   SUSPEND   ACTIVE   LAST SCHEDULE   AGE
+relogio   */1 * * * *   <none>     False     0        29s             43s
