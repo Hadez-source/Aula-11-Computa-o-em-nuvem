@@ -104,3 +104,13 @@ relogio-29916110-7mkj8   0/1     Completed   0          111s
 relogio-29916111-ghgzt   0/1     Completed   0          51s
 tarefa-b22np             0/1     Completed   0          14m
 teste-agora-srgwg        0/1     Completed   0          94s
+
+
+Página web sempre disponível: qual controlador?
+O Deployment é utilizado porque garante que os pods fiquem em execução contínua e sejam recriados automaticamente caso ocorra alguma falha.
+
+Relatório solicitado uma única vez: qual controlador?
+O Job é aplicado em tarefas que possuem um ciclo de vida definido com início e término, executando até concluir o processamento e finalizando em seguida.
+
+Relatório diário: qual controlador?
+O CronJob é empregado para automatizar execuções recorrentes baseadas em agendamentos de tempo, criando novos Jobs nos horários configurados.
