@@ -72,3 +72,15 @@ cronjob.batch/relogio created
 root@controlplane:~$ kubectl -n aula11 get cronjob relogio
 NAME      SCHEDULE      TIMEZONE   SUSPEND   ACTIVE   LAST SCHEDULE   AGE
 relogio   */1 * * * *   <none>     False     0        29s             43s
+
+Passo 6
+root@controlplane:~$ kubectl -n aula11 create job teste-agora \
+  --from=cronjob/relogio
+job.batch/teste-agora created
+root@controlplane:~$ kubectl -n aula11 wait --for=condition=complete \
+  job/teste-agora --timeout=120s
+job.batch/teste-agora condition met
+root@controlplane:~$ kubectl -n aula11 logs job/teste-agora
+Wed Nov 18 01:50:18 UTC 2026
+Execucao agendada
+
