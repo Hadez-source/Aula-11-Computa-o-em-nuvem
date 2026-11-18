@@ -37,3 +37,28 @@ root@controlplane:~$ kubectl -n aula11 logs job/tarefa
 Inicio
 Wed Nov 18 01:31:05 UTC 2026
 Concluido
+
+Passo 4
+root@controlplane:~$ cat > lote.yaml <<'EOF'
+apiVersion: batch/v1
+kind: Job
+metadata: {name: lote, namespace: aula11}
+spec:
+  completions: 3
+  parallelism: 2
+  template:
+    spec:
+      containers:
+      - name: lote
+        image: busybox:1.36
+        command: ['sh', '-c', 'date; sleep 5; echo OK']
+      restartPolicy: Never
+EOF
+root@controlplane:~$  kubectl apply -f lote.yaml
+job.batch/lote created
+root@controlplane:~$ kubectl -n aula11 get pods -w
+NAME           READY   STATUS      RESTARTS   AGE
+lote-p4tjw     0/1     Completed   0          26s
+lote-qkwh7     0/1     Completed   0          26s
+lote-z5jn6     0/1     Completed   0          17s
+tarefa-b22np   0/1     Completed   0          5m5s
